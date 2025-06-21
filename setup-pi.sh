@@ -56,12 +56,8 @@ install_docker() {
 # -----------------------------
 install_samba() {
     print_status "Installing Samba..."
-    if sudo apt install -y samba; then
-        print_ok "Samba installed"
-    else
-        print_error "Failed to install Samba"
-        exit 1
-    fi
+    sudo apt install -y samba
+    print_ok "Samba installed"
 }
 
 # -----------------------------
@@ -87,38 +83,40 @@ replace_samba_config() {
 # Add Samba user
 # -----------------------------
 add_samba_user() {
-    print_status "Adding Samba user '$USER' with password 'raspberry'..."
-    if echo -e "raspberry\nraspberry" | sudo smbpasswd -s -a $USER; then
-        sudo smbpasswd -e $USER
-        print_ok "Samba user '$USER' added and enabled"
-    else
-        print_error "Failed to add Samba user '$USER'"
-        exit 1
-    fi
+    print_status "Adding Samba user '$USER'..."
+    echo -e "raspberry\nraspberry" | sudo smbpasswd -s -a $USER
+    sudo smbpasswd -e $USER
+    print_ok "Samba user '$USER' added and enabled"
 }
 
 # -----------------------------
-# Install extra useful tools
+# Install extra testbench tools
 # -----------------------------
 install_extra_tools() {
-    print_status "Installing additional useful packages..."
+    read -p "Do you want to install extra testbench tools (stress, screen)? (y/n): " answer
+    case "$answer" in
+        [Yy]* )
+            print_status "Installing stress..."
+            if sudo apt install -y stress; then
+                print_ok "Stress installed successfully"
+            else
+                print_error "Failed to install stress"
+            fi
 
-    packages=(
-      htop nmap tcpdump iftop net-tools traceroute dnsutils curl wget git vim build-essential
-      python3 python3-pip nodejs npm docker-compose screen tmux sysstat logwatch fail2ban ufw jq ncdu rsync
-      stress stress-ng
-    )
-
-    for pkg in "${packages[@]}"; do
-        print_status "Installing $pkg..."
-        if sudo apt install -y "$pkg"; then
-            print_ok "$pkg installed successfully"
-        else
-            print_error "Failed to install $pkg"
-        fi
-    done
-
-    print_ok "Additional tools installation completed"
+            print_status "Installing screen..."
+            if sudo apt install -y screen; then
+                print_ok "Screen installed successfully"
+            else
+                print_error "Failed to install screen"
+            fi
+            ;;
+        [Nn]* )
+            print_status "Skipping extra tools installation"
+            ;;
+        * )
+            print_warning "Invalid input, skipping extra tools installation"
+            ;;
+    esac
 }
 
 # -----------------------------
@@ -130,7 +128,7 @@ show_final_info() {
     echo
 
     print_status "Gathering system information..."
-
+    
     HOSTNAME=$(hostname)
     IP_ADDR=$(hostname -I | awk '{print $1}')
     MAC_ADDR=$(ip link show eth0 | awk '/ether/ {print $2}' || echo "Unavailable")
