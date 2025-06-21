@@ -2,7 +2,7 @@
 This repository contains scripts to automate useful setups on your Raspberry Pi:
 
 ## Scripts
-### Full Raspberry Pi Setup - Updates system, installs Docker, Samba (with custom config and user), useful monitoring/network tools, shows system info, and reboots automatically.
+### Full Raspberry Pi Setup ### - Updates system, installs Docker, Samba (with custom config and user), useful monitoring/network tools, shows system info, and reboots automatically.
 
 CMD
 ```
