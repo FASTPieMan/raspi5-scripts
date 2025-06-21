@@ -1,12 +1,12 @@
 # 🛠 Raspberry Pi Setup Script
 
 ## Automates Raspberry Pi setup with:
-🔄 System update & cleanup
-🐳 Docker installation
-📁 Samba setup (custom config, user: your-username, pass: raspberry)
-🧰 Extra tools: htop, nmap, stress, tmux, etc.
-🖥 System info summary (IP, MAC, open ports)
-🔁 Auto reboot after 30 seconds
+- 🔄 System update & cleanup
+- 🐳 Docker installation
+- 📁 Samba setup (custom config, user: your-username, pass: raspberry)
+- 🧰 Extra tools: htop, nmap, stress, tmux, etc.
+- 🖥 System info summary (IP, MAC, open ports)
+- 🔁 Auto reboot after 30 seconds
 
 ## ▶️ Quick Start
 Install Git (if needed):
