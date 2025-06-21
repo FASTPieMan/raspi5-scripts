@@ -1,62 +1,48 @@
 🛠 Raspberry Pi Setup Script
+
+
 This script automatically configures a Raspberry Pi with:
-
 🔄 System update and cleanup
-
 🐳 Docker installation
-
 📁 Samba installation and configuration (with custom smb.conf)
-
 👤 Samba user creation (default password: raspberry)
-
 🛠 Installation of extra useful tools for monitoring, networking, and stress testing
-
 🖥 System summary info (IP, MAC address, open ports)
-
 🔁 Automatic reboot after 30 seconds
 
+
 📦 What it does
-Fully updates and cleans your Raspberry Pi OS
-
-Installs Docker using the official installation script
-
-Installs Samba and replaces the default config with a custom smb.conf
-
-Adds a Samba user matching your current username, with default password raspberry
-
-Installs extra useful tools like htop, nmap, stress, screen, tmux, and more
-
-Displays key system and network information after setup completes
-
-Waits 30 seconds, then automatically reboots the device
+- Fully updates and cleans your Raspberry Pi OS
+- Installs Docker using the official installation script
+- Installs Samba and replaces the default config with a custom smb.conf
+- Adds a Samba user matching your current username, with default password raspberry
+- Installs extra useful tools like htop, nmap, stress, screen, tmux, and more
+- Displays key system and network information after setup completes
+- Waits 30 seconds, then automatically reboots the device
 
 ▶️ Quick Start
 ⚠️ This will reboot your Pi automatically 30 seconds after finishing. Save your work!
-
 Copy and paste this in your Raspberry Pi terminal:
 
 bash
 Copy
 Edit
 git clone https://github.com/YOUR-USER/YOUR-REPO.git && cd YOUR-REPO && chmod +x setup.sh && ./setup.sh
+
+
 🔧 Extra Tools Installed
 Network and monitoring: htop, nmap, tcpdump, iftop, traceroute, dnsutils, net-tools
-
 Development essentials: build-essential, python3, python3-pip, nodejs, npm
-
 Terminal multiplexers: screen, tmux
-
 System utilities: sysstat, logwatch, fail2ban, ufw, jq, ncdu, rsync
-
 Stress testing: stress, stress-ng
+
 
 📋 Samba Configuration
 Replaces /etc/samba/smb.conf with a custom config included in the repo
 
 Shares include:
-
 [homes] — your home directory with read-write access
-
 [admin] — root / directory with read-only access
 
 Samba user is your current Linux user with password raspberry
