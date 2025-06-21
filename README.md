@@ -27,4 +27,4 @@ This script automatically configures a Raspberry Pi with:
 Copy and paste this into your terminal:
 
 ```bash
-git clone https://github.com/YOUR-USER/YOUR-REPO.git && cd YOUR-REPO && chmod +x setup.sh && ./setup.sh
+git clone [https://github.com/YOUR-USER/YOUR-REPO.git](https://github.com/FASTPieMan/testbench) && cd testbench && chmod +x setup.sh && ./setup.sh
