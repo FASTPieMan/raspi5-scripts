@@ -2,13 +2,13 @@
 
 
 ## This script automatically configures a Raspberry Pi with:
-1. 🔄 System update and cleanup
-2. 🐳 Docker installation
-3. 📁 Samba installation and configuration (with custom smb.conf)
-4. 👤 Samba user creation (default password: raspberry)
-5. 🛠 Installation of extra useful tools for monitoring, networking, and stress testing
-6. 🖥 System summary info (IP, MAC address, open ports)
-7. 🔁 Automatic reboot after 30 seconds
+- 🔄 System update and cleanup
+- 🐳 Docker installation
+- 📁 Samba installation and configuration (with custom smb.conf)
+- 👤 Samba user creation (default password: raspberry)
+- 🛠 Installation of extra useful tools for monitoring, networking, and stress testing
+- 🖥 System summary info (IP, MAC address, open ports)
+- 🔁 Automatic reboot after 30 seconds
 
 
 ## 📦 What it does
@@ -31,11 +31,11 @@ git clone https://github.com/FASTPieMan/testbench.git && cd testbench && chmod +
 
 
 ## 🔧 Extra Tools Installed
-Network and monitoring: htop, nmap, tcpdump, iftop, traceroute, dnsutils, net-tools
-Development essentials: build-essential, python3, python3-pip, nodejs, npm
-Terminal multiplexers: screen, tmux
-System utilities: sysstat, logwatch, fail2ban, ufw, jq, ncdu, rsync
-Stress testing: stress, stress-ng
+- Network and monitoring: htop, nmap, tcpdump, iftop, traceroute, dnsutils, net-tools
+- Development essentials: build-essential, python3, python3-pip, nodejs, npm
+- Terminal multiplexers: screen, tmux
+- System utilities: sysstat, logwatch, fail2ban, ufw, jq, ncdu, rsync
+- Stress testing: stress, stress-ng
 
 
 ## 📋 Samba Configuration
