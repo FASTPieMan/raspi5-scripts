@@ -5,6 +5,17 @@
 - ⚙️ Applies a custom htoprc config
 - 🚀 Launches htop after setup
 
+## ▶️ Quick Start
+Install Git (if needed):
+
+```
+sudo apt update && sudo apt install -y git
+```
+
+Run setup:
+```
+git clone https://github.com/FASTPieMan/raspi5-scripts.git && cd raspi5-scripts/Htop-prefrences && chmod +x Htop-setup.sh && ./Htop-setup.sh
+```
 
 ## 🗂 htop Config
 Looks for htoprc in the script directory
