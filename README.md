@@ -33,12 +33,10 @@ Copy this command and wait for the install to complete:
 git clone https://github.com/FASTPieMan/testbench.git && cd testbench && chmod +x setup-pi.sh && ./setup-pi.sh
 ```
 
-## 🔧 Extra Tools Installed
-- Network and monitoring: htop, nmap, tcpdump, iftop, traceroute, dnsutils, net-tools
-- Development essentials: build-essential, python3, python3-pip, nodejs, npm
-- Terminal multiplexers: screen, tmux
-- System utilities: sysstat, logwatch, fail2ban, ufw, jq, ncdu, rsync
-- Stress testing: stress, stress-ng
+##🔧 Extra Tools Installed
+- Monitoring and diagnostics: htop
+- Programming runtime: python3, python3-pip
+- Networking tools: nmap, tcpdump
 
 
 ## 📋 Samba Configuration
