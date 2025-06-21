@@ -1,4 +1,4 @@
-# 🛠 Raspberry Pi Setup Script
+# 🛠 Raspberry Pi Setup Scripts
 This repository contains scripts to automate useful setups on your Raspberry Pi:
 
 ## Scripts
