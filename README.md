@@ -21,7 +21,7 @@
 - Waits 30 seconds, then automatically reboots the device
 
 ## ▶️ Quick Start
-## ⚠️ Warning: This script will automatically reboot your Raspberry Pi 30 seconds after completing. Please save all your work before running it!
+⚠️ Warning: This script will automatically reboot your Raspberry Pi 30 seconds after completing. Please save all your work before running it!
 
 Install Git (if not already installed):
 sudo apt update && sudo apt install -y git
