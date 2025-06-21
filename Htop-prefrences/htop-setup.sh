@@ -65,7 +65,7 @@ apply_htop_config() {
 # -----------------------------
 launch_htop() {
     print_status "Launching htop with custom configuration..."
-    sleep 1
+    sleep 10
     htop
 }
 
