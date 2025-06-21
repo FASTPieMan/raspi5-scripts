@@ -17,7 +17,7 @@ sudo apt update && sudo apt install -y git
 
 Run setup:
 ```
-git clone https://github.com/FASTPieMan/testbench.git && cd testbench && chmod +x setup-pi.sh && ./setup-pi.sh
+git clone https://github.com/FASTPieMan/raspi5-scripts.git && cd raspi5-scripts/Testbench && chmod +x pi-setup.sh && ./pi-setup.sh
 ```
 
 ## 📦 Samba Config
