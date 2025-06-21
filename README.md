@@ -27,7 +27,7 @@ Install Git (if not already installed):
 sudo apt update && sudo apt install -y git
 
 Copy this command and wait for the install to complete:
-``bash git clone https://github.com/FASTPieMan/testbench.git && cd testbench && chmod +x setup-raspi.sh && ./setup-raspi.sh
+```bash git clone https://github.com/FASTPieMan/testbench.git && cd testbench && chmod +x setup-raspi.sh && ./setup-raspi.sh
 
 
 ## 🔧 Extra Tools Installed
