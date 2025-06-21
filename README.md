@@ -10,6 +10,7 @@ CMD
 git clone https://github.com/FASTPieMan/raspi5-scripts.git && cd raspi5-scripts/Testbench && chmod +x pi-setup.sh && ./pi-setup.sh
 ```
 
+
 ### Auto htop Setup
 Installs htop if needed, applies a custom htoprc config, and launches htop.
 
