@@ -90,33 +90,49 @@ add_samba_user() {
 }
 
 # -----------------------------
-# Install extra testbench tools
+# Install Extra Tools
 # -----------------------------
 install_extra_tools() {
-    read -p "Do you want to install extra testbench tools (stress, screen)? (y/n): " answer
-    case "$answer" in
-        [Yy]* )
-            print_status "Installing stress..."
-            if sudo apt install -y stress; then
-                print_ok "Stress installed successfully"
-            else
-                print_error "Failed to install stress"
-            fi
+    echo
+    read -rp "Do you want to install extra useful tools (network, dev, monitoring, stress)? (y/n): " install_extra
+    if [[ "$install_extra" =~ ^[Yy]$ ]]; then
+        declare -A tools=(
+            [htop]="Interactive process viewer"
+            [nmap]="Network scanner"
+            [tcpdump]="Network packet capture"
+            [iftop]="Bandwidth monitoring"
+            [traceroute]="Network route tracing"
+            [dnsutils]="DNS troubleshooting tools"
+            [net-tools]="Legacy networking tools"
+            [build-essential]="Compiler & build tools"
+            [python3]="Python 3 interpreter"
+            [python3-pip]="Python 3 package manager"
+            [nodejs]="JavaScript runtime"
+            [npm]="Node package manager"
+            [screen]="Terminal multiplexer"
+            [tmux]="Terminal multiplexer alternative"
+            [sysstat]="System performance tools"
+            [logwatch]="Log analyzer"
+            [fail2ban]="Intrusion prevention"
+            [ufw]="Firewall management"
+            [jq]="JSON processor"
+            [ncdu]="Disk usage analyzer"
+            [rsync]="File sync & backup"
+            [stress]="Stress testing tool"
+            [stress-ng]="Advanced stress testing"
+        )
 
-            print_status "Installing screen..."
-            if sudo apt install -y screen; then
-                print_ok "Screen installed successfully"
+        for pkg in "${!tools[@]}"; do
+            echo "Installing $pkg (${tools[$pkg]})..."
+            if sudo apt install -y "$pkg"; then
+                echo -e "\e[32m[$(date "+%Y-%m-%d %H:%M:%S")] [OK]\e[0m $pkg installed successfully"
             else
-                print_error "Failed to install screen"
+                echo -e "\e[31m[$(date "+%Y-%m-%d %H:%M:%S")] [ERROR]\e[0m Failed to install $pkg"
             fi
-            ;;
-        [Nn]* )
-            print_status "Skipping extra tools installation"
-            ;;
-        * )
-            print_warning "Invalid input, skipping extra tools installation"
-            ;;
-    esac
+        done
+    else
+        echo "Skipping extra tools installation."
+    fi
 }
 
 # -----------------------------
