@@ -107,7 +107,7 @@ add_samba_user() {
 # -----------------------------
 install_extra_tools() {
     echo
-    read -rp "Do you want to install extra useful tools (network, dev, monitoring, stress)? (y/n): " install_extra
+    read -rp "$(echo -e "${BLUE}[$(date '+%Y-%m-%d %H:%M:%S')] [INFO]${NC} Do you want to install extra useful tools (network, dev, monitoring, stress)? (y/n): ")" install_extra
     if [[ "$install_extra" =~ ^[Yy]$ ]]; then
         declare -A tools=(
             [htop]="Interactive process viewer"
