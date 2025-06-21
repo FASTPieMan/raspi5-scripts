@@ -84,9 +84,22 @@ replace_samba_config() {
 # -----------------------------
 add_samba_user() {
     print_status "Adding Samba user '$USER'..."
-    echo -e "raspberry\nraspberry" | sudo smbpasswd -s -a $USER
-    sudo smbpasswd -e $USER
-    print_ok "Samba user '$USER' added and enabled"
+
+    while true; do
+        read -s -p "Enter Samba password for user '$USER': " pass1
+        echo
+        read -s -p "Confirm Samba password for user '$USER': " pass2
+        echo
+
+        if [ "$pass1" = "$pass2" ]; then
+            echo -e "$pass1\n$pass1" | sudo smbpasswd -s -a "$USER"
+            sudo smbpasswd -e "$USER"
+            print_ok "Samba user '$USER' added and enabled"
+            break
+        else
+            print_error "Passwords do not match. Please try again."
+        fi
+    done
 }
 
 # -----------------------------
