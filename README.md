@@ -19,7 +19,6 @@ git clone https://github.com/FASTPieMan/raspi5-scripts.git && cd raspi5-scripts/
 ```
 
 ## ▶️ Quick Start
-Clone the repo and run any script you need:
 Install Git (if needed):
 ```
 sudo apt update && sudo apt install -y git
