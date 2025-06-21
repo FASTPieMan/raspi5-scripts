@@ -24,20 +24,10 @@ This script automatically configures a Raspberry Pi with:
 ⚠️ Warning: This script will automatically reboot your Raspberry Pi 30 seconds after completing. Please save all your work before running it!
 
 Install Git (if not already installed):
-
-bash
-Copy
-Edit
 sudo apt update && sudo apt install -y git
-Clone the repository, make the script executable, and run it:
 
-bash
-Copy
-Edit
-git clone https://github.com/FASTPieMan/testbench.git
-cd testbench
-chmod +x setup.sh
-./setup.sh
+Copy this command and wait for the install to complete:
+git clone https://github.com/FASTPieMan/testbench.git && cd testbench && chmod +x setup-raspi.sh && ./setup-raspi.sh
 
 
 🔧 Extra Tools Installed
