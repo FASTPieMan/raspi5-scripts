@@ -21,13 +21,23 @@ This script automatically configures a Raspberry Pi with:
 - Waits 30 seconds, then automatically reboots the device
 
 ▶️ Quick Start
-⚠️ This will reboot your Pi automatically 30 seconds after finishing. Save your work!
-Copy and paste this in your Raspberry Pi terminal:
+⚠️ Warning: This script will automatically reboot your Raspberry Pi 30 seconds after completing. Please save all your work before running it!
+
+Install Git (if not already installed):
 
 bash
 Copy
 Edit
-git clone https://github.com/YOUR-USER/YOUR-REPO.git && cd YOUR-REPO && chmod +x setup.sh && ./setup.sh
+sudo apt update && sudo apt install -y git
+Clone the repository, make the script executable, and run it:
+
+bash
+Copy
+Edit
+git clone https://github.com/FASTPieMan/testbench.git
+cd testbench
+chmod +x setup.sh
+./setup.sh
 
 
 🔧 Extra Tools Installed
@@ -49,7 +59,5 @@ Samba user is your current Linux user with password raspberry
 
 ⚙️ Notes
 Run script with sudo privileges (the script uses sudo internally)
-
 Script will reboot after setup; press CTRL+C to cancel reboot if needed
-
 Customize Samba shares by editing the smb.conf file before running the script
