@@ -5,7 +5,7 @@ This repository contains scripts to automate useful setups on your Raspberry Pi:
 ### Full Raspberry Pi Testbench setup
 - Updates system, installs Docker, Samba (with custom config and user), useful monitoring/network tools, shows system info, and reboots automatically.
 
-CMD
+Setup CMD
 ```
 git clone https://github.com/FASTPieMan/raspi5-scripts.git && cd raspi5-scripts/Testbench && chmod +x pi-setup.sh && ./pi-setup.sh
 ```
@@ -13,7 +13,7 @@ git clone https://github.com/FASTPieMan/raspi5-scripts.git && cd raspi5-scripts/
 ### Auto htop Setup 
 - Installs htop if needed, applies a custom htoprc config, and launches htop.
 
-CMD
+Setup CMD
 ```
 git clone https://github.com/FASTPieMan/raspi5-scripts.git && cd raspi5-scripts/Htop-prefrences && chmod +x htop-setup.sh && ./htop-setup.sh
 ```
@@ -24,7 +24,7 @@ Install Git (if needed):
 ```
 sudo apt update && sudo apt install -y git
 ```
-Run the desired setup script from above.
+Run the desired setup CMD from above.
 
 ## ⚙️ Notes
 - Run scripts with sudo as needed
