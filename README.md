@@ -2,13 +2,13 @@
 
 
 ## This script automatically configures a Raspberry Pi with:
-🔄 System update and cleanup
-🐳 Docker installation
-📁 Samba installation and configuration (with custom smb.conf)
-👤 Samba user creation (default password: raspberry)
-🛠 Installation of extra useful tools for monitoring, networking, and stress testing
-🖥 System summary info (IP, MAC address, open ports)
-🔁 Automatic reboot after 30 seconds
+1. 🔄 System update and cleanup
+2. 🐳 Docker installation
+3. 📁 Samba installation and configuration (with custom smb.conf)
+4. 👤 Samba user creation (default password: raspberry)
+5. 🛠 Installation of extra useful tools for monitoring, networking, and stress testing
+6. 🖥 System summary info (IP, MAC address, open ports)
+7. 🔁 Automatic reboot after 30 seconds
 
 
 ## 📦 What it does
