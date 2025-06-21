@@ -24,11 +24,14 @@
 ⚠️ Warning: This script will automatically reboot your Raspberry Pi 30 seconds after completing. Please save all your work before running it!
 
 Install Git (if not already installed):
+```bash
 sudo apt update && sudo apt install -y git
+```
 
 Copy this command and wait for the install to complete:
-```bash git clone https://github.com/FASTPieMan/testbench.git && cd testbench && chmod +x setup-raspi.sh && ./setup-raspi.sh
-
+```bash
+git clone https://github.com/FASTPieMan/testbench.git && cd testbench && chmod +x setup-raspi.sh && ./setup-raspi.sh
+```
 
 ## 🔧 Extra Tools Installed
 - Network and monitoring: htop, nmap, tcpdump, iftop, traceroute, dnsutils, net-tools
