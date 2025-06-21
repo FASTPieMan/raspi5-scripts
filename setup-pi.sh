@@ -56,8 +56,12 @@ install_docker() {
 # -----------------------------
 install_samba() {
     print_status "Installing Samba..."
-    sudo apt install -y samba
-    print_ok "Samba installed"
+    if sudo apt install -y samba; then
+        print_ok "Samba installed"
+    else
+        print_error "Failed to install Samba"
+        exit 1
+    fi
 }
 
 # -----------------------------
@@ -80,6 +84,44 @@ replace_samba_config() {
 }
 
 # -----------------------------
+# Add Samba user
+# -----------------------------
+add_samba_user() {
+    print_status "Adding Samba user '$USER' with password 'raspberry'..."
+    if echo -e "raspberry\nraspberry" | sudo smbpasswd -s -a $USER; then
+        sudo smbpasswd -e $USER
+        print_ok "Samba user '$USER' added and enabled"
+    else
+        print_error "Failed to add Samba user '$USER'"
+        exit 1
+    fi
+}
+
+# -----------------------------
+# Install extra useful tools
+# -----------------------------
+install_extra_tools() {
+    print_status "Installing additional useful packages..."
+
+    packages=(
+      htop nmap tcpdump iftop net-tools traceroute dnsutils curl wget git vim build-essential
+      python3 python3-pip nodejs npm docker-compose screen tmux sysstat logwatch fail2ban ufw jq ncdu rsync
+      stress stress-ng
+    )
+
+    for pkg in "${packages[@]}"; do
+        print_status "Installing $pkg..."
+        if sudo apt install -y "$pkg"; then
+            print_ok "$pkg installed successfully"
+        else
+            print_error "Failed to install $pkg"
+        fi
+    done
+
+    print_ok "Additional tools installation completed"
+}
+
+# -----------------------------
 # Final System Info
 # -----------------------------
 show_final_info() {
@@ -88,7 +130,7 @@ show_final_info() {
     echo
 
     print_status "Gathering system information..."
-    
+
     HOSTNAME=$(hostname)
     IP_ADDR=$(hostname -I | awk '{print $1}')
     MAC_ADDR=$(ip link show eth0 | awk '/ether/ {print $2}' || echo "Unavailable")
@@ -102,6 +144,10 @@ show_final_info() {
     echo
     print_ok "System setup is complete!"
     echo
+
+    print_warning "Rebooting in 30 seconds... Press CTRL+C to cancel."
+    sleep 30
+    sudo reboot
 }
 
 # -----------------------------
@@ -116,6 +162,8 @@ main() {
     install_docker
     install_samba
     replace_samba_config
+    add_samba_user
+    install_extra_tools
     show_final_info
 }
 
