@@ -31,12 +31,9 @@ print_error() {
 # -----------------------------
 # Configurable vars
 # -----------------------------
-GRAFANA_ADMIN_USER="admin"
 GRAFANA_ADMIN_PASS="admin123"  # change this to your preferred password
 GRAFANA_PORT=3000
 PROMETHEUS_SCRAPE_INTERVAL="5s"
-GRAFANA_API_URL="http://localhost:${GRAFANA_PORT}"
-DASHBOARD_IDS=(1860 193 10578)
 
 # -----------------------------
 # Check Docker & Docker Compose
@@ -156,88 +153,6 @@ start_stack() {
 }
 
 # -----------------------------
-# Wait for Grafana API to be ready
-# -----------------------------
-wait_for_grafana() {
-    print_status "Waiting for Grafana to be ready on port ${GRAFANA_PORT}..."
-
-    for i in {1..30}; do
-        if curl -s "${GRAFANA_API_URL}/api/health" | grep -q '"database":"ok"'; then
-            print_ok "Grafana is ready."
-            return 0
-        else
-            print_status "Waiting for Grafana... (${i}/30)"
-            sleep 2
-        fi
-    done
-
-    print_error "Grafana did not become ready in time."
-    exit 1
-}
-
-# -----------------------------
-# Configure Grafana: set datasource + import dashboards
-# -----------------------------
-configure_grafana() {
-    print_status "Configuring Grafana datasource and dashboards..."
-
-    # Base64 encode admin creds for basic auth
-    AUTH_HEADER="Authorization: Basic $(echo -n "${GRAFANA_ADMIN_USER}:${GRAFANA_ADMIN_PASS}" | base64)"
-
-    # Add Prometheus data source
-    print_status "Adding Prometheus data source..."
-    curl -s -X POST "${GRAFANA_API_URL}/api/datasources" \
-        -H "Content-Type: application/json" \
-        -H "${AUTH_HEADER}" \
-        -d '{
-            "name":"Prometheus",
-            "type":"prometheus",
-            "access":"proxy",
-            "url":"http://prometheus:9090",
-            "isDefault":true
-        }' | grep -q '"message":"Datasource added"' && print_ok "Prometheus datasource added." || print_warning "Datasource may already exist or failed."
-
-    # Import dashboards by ID
-    for id in "${DASHBOARD_IDS[@]}"; do
-        print_status "Importing dashboard ID ${id}..."
-        DASHBOARD_JSON=$(curl -s "https://grafana.com/api/dashboards/${id}/revisions/latest/download")
-        if [ -z "$DASHBOARD_JSON" ]; then
-            print_warning "Failed to fetch dashboard ${id} JSON."
-            continue
-        fi
-
-        # Prepare import payload
-        IMPORT_PAYLOAD=$(jq -n \
-            --argjson dashboard "$DASHBOARD_JSON" \
-            --arg datasource "Prometheus" \
-            '{
-                "dashboard": $dashboard,
-                "overwrite": true,
-                "inputs": [
-                    {
-                        "name": "DS_PROMETHEUS",
-                        "type": "datasource",
-                        "pluginId": "prometheus",
-                        "value": $datasource
-                    }
-                ]
-            }')
-
-        # Import dashboard
-        RESPONSE=$(curl -s -X POST "${GRAFANA_API_URL}/api/dashboards/import" \
-            -H "Content-Type: application/json" \
-            -H "${AUTH_HEADER}" \
-            -d "$IMPORT_PAYLOAD")
-
-        if echo "$RESPONSE" | grep -q '"status":"success"'; then
-            print_ok "Dashboard ID ${id} imported successfully."
-        else
-            print_warning "Failed to import dashboard ID ${id}. Response: $RESPONSE"
-        fi
-    done
-}
-
-# -----------------------------
 # Summary & Access URLs
 # -----------------------------
 print_summary() {
@@ -249,26 +164,18 @@ print_summary() {
     echo -e "Node Exporter: port 9100"
     echo -e "cAdvisor:   ${GREEN}http://<your-pi-ip>:8080${NC}"
     echo
-    echo -e "Grafana is preconfigured with Prometheus datasource and dashboards:"
-    echo -e " - Node Exporter Full (ID 1860)"
-    echo -e " - Docker Metrics (ID 193)"
-    echo -e " - Raspberry Pi Metrics (ID 10578)"
-    echo
 }
 
 # -----------------------------
 # Main
 # -----------------------------
 main() {
-    print_status "Starting Grafana + Prometheus + Node Exporter + cAdvisor setup for Raspberry Pi 5..."
+    print_status "Starting Grafana + Prometheus + Node Exporter + cAdvisor setup..."
 
     check_requirements
     create_prometheus_config
     create_docker_compose
     start_stack
-
-    wait_for_grafana
-    configure_grafana
 
     print_summary
 }
